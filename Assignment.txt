@@ -1,0 +1,402 @@
+Q1. Create generic class for Queue
+
+
+package com.queue;
+
+public class QueueGeneric<T> {
+	private T[] arr;
+	private int size;
+	private int rear = -1, front = -1;
+
+	public QueueGeneric(int size) {
+		size = 10;
+		this.size = size;
+		arr = (T[]) new Object[size];
+		rear = -1;
+		front = -1;
+	}
+
+	public boolean isFull() {
+		if (rear == (size - 1)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isEmpty() {
+		if (front == -1 || (front > rear)) {
+			return true;
+		} else {
+			return false;
+
+		}
+	}
+
+	public boolean enqueue(T element) {
+		if (isFull() == false) {
+			rear = rear + 1;
+			arr[rear] = element;
+			if (front == -1) {
+				front = 0;
+			}
+			System.out.println("Enqueue : "+element+" Rear="+rear+" Front="+front );
+			return true;
+
+		} else {
+			return false;
+
+		}
+	}
+
+	public T dequeue() {
+		if (isEmpty() == false) {
+			T temp = arr[front];
+			front = front + 1;
+			System.out.println("Dequeue "+temp+" Rear "+rear+" Front= "+front);
+			return temp;
+			
+		} else {
+		
+			return null;
+		}
+
+	}
+}
+
+
+package com.queue;
+
+public class TesterGeneric {
+
+	public static void main(String[] args) {
+		QueueGeneric<Integer> q=new QueueGeneric<Integer>(4);
+		 q.enqueue(10);
+		 q.enqueue(11);
+		 q.enqueue(12);
+		 q.enqueue(13);
+		
+		 
+		 q.dequeue();
+		 q.dequeue();
+		 q.dequeue();
+		 q.dequeue();
+	}
+
+}
+
+
+output
+
+Enqueue : 10 Rear=0 Front=0
+Enqueue : 11 Rear=1 Front=0
+Enqueue : 12 Rear=2 Front=0
+Enqueue : 13 Rear=3 Front=0
+
+Dequeue 10 Rear 3 Front= 1
+Dequeue 11 Rear 3 Front= 2
+Dequeue 12 Rear 3 Front= 3
+Dequeue 13 Rear 3 Front= 4
+
+
+
+
+Q2. Create generic class for Circular Queue
+
+package com.CircularQueue;
+
+public class CircularQueue <T> {
+
+	
+		private T[] arr;
+		private int size;
+		private int rear = -1, front = -1,count=0;
+
+		public CircularQueue(int size) {
+			size = 10;
+			this.size = size;
+			arr = (T[]) new Object[size];
+			rear = -1;
+			front = -1;
+		}
+
+		public boolean isFull() {
+			if (rear == (size - 1)) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public boolean isEmpty() {
+			if (front == -1 || (front > rear)) {
+				return true;
+			} else {
+				return false;
+
+			}
+		}
+
+		public boolean enqueue(T element) {
+			if (isFull() == false) {
+				rear = rear + 1;
+				arr[rear] = element;
+				if (front == -1) {
+					front = 0;
+				}
+				count=count+1;
+				System.out.println("Enqueue : "+element+" Rear="+rear+" Front="+front );
+				return true;
+
+			} else {
+				return false;
+
+			}
+		}
+
+		public T dequeue() {
+			if (isEmpty() == false) {
+				T temp = arr[front];
+				front = front + 1;
+				count=count-1;
+				System.out.println("Dequeue "+temp+" Rear "+rear+" Front= "+front);
+				return temp;
+				
+			} else {
+			
+				return null;
+			}
+
+		}
+		public T peek() {
+			if(isFull()==false && isEmpty()==false) {
+				T temp=arr[front];
+				System.out.println("Peek :"+temp);
+				return temp;
+			}
+			else {
+				return null;
+			}
+			
+		}
+	}
+	
+
+
+package com.CircularQueue;
+
+public class TestCircularQueue {
+
+	public static void main(String[] args) {
+		CircularQueue <Integer> cq=new CircularQueue<Integer>(4);
+        cq.enqueue(18);
+        cq.enqueue(19);
+        cq.enqueue(20);
+        
+        cq.dequeue();
+        cq.dequeue();
+        
+        
+        cq.enqueue(21);
+        cq.enqueue(22);
+        cq.enqueue(23);
+        cq.dequeue();
+        cq.enqueue(24);
+        cq.dequeue();
+        cq.enqueue(28);
+        cq.dequeue();
+        cq.enqueue(26);
+	}
+
+}
+
+
+
+output 
+
+Enqueue : 18 Rear=0 Front=0
+Enqueue : 19 Rear=1 Front=0
+Enqueue : 20 Rear=2 Front=0
+
+Dequeue 18 Rear 2 Front= 1
+Dequeue 19 Rear 2 Front= 2
+
+Enqueue : 21 Rear=3 Front=2
+Enqueue : 22 Rear=4 Front=2
+Enqueue : 23 Rear=5 Front=2
+
+Dequeue 20 Rear 5 Front= 3
+
+Enqueue : 24 Rear=6 Front=3
+
+Dequeue 21 Rear 6 Front= 4
+
+Enqueue : 28 Rear=7 Front=4
+
+Dequeue 22 Rear 7 Front= 5
+
+Enqueue : 26 Rear=8 Front=5
+
+
+
+
+Q3. Define Circular Queue of size 5 for storing object of MyProcess Class
+MyProcess has attributes pid, pname, owner
+a. Here enqueue 5 processes 
+b. dequeue 5 processes and display their details one by one
+c. Here enqueue 5 processes 
+d. dequeue 5 processes and display their details one by one
+
+
+package com.q3;
+
+public class CircularQueue1<T> {
+	private T[] arr;
+	private int size;
+	private int rear = -1, front = -1,count=0;
+
+	public CircularQueue1(int size) {
+		size = 10;
+		this.size = size;
+		arr = (T[]) new Object[size];
+		rear = -1;
+		front = -1;
+	}
+
+	public boolean isFull() {
+		if (rear == (arr.length - 1)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isEmpty() {
+		if ((front == -1 && rear==-1) || (front > rear)) {
+			return true;
+		} else {
+			return false;
+
+		}
+	}
+
+	public boolean enqueue(T element) {
+		if (isFull() == false) {
+			rear = (rear + 1)%arr.length;
+			arr[rear] = element;
+			if (front == -1) {
+				front = 0;
+			}
+			count=count+1;
+			
+			return true;
+
+		} else {
+			return false;
+
+		}
+	}
+
+	public T dequeue() {
+		if (isEmpty() == false) {
+			T temp = arr[front];
+			front = (front + 1)%arr.length;
+			count=count-1;
+			//System.out.println("Dequeue  :"+temp+" Rear="+rear+" Front="+front);
+			return temp;
+			
+		} else {
+		
+			return null;
+		}
+
+	}
+	public T peek() {
+		if(isFull()==false && isEmpty()==false) {
+			T temp=arr[front];
+			System.out.println("Peek :"+temp);
+			return temp;
+		}
+		else {
+			return null;
+		}
+		
+	}
+
+	
+}
+
+
+
+
+package com.q3;
+
+public class MyProcess {
+      private int pid;
+      private String pname;
+      private String owner;
+      
+      
+	public MyProcess() {
+	  System.out.println("Default constr");
+	}
+	public MyProcess(int pid, String pname, String owner) {
+		
+		this.pid = pid;
+		this.pname = pname;
+		this.owner = owner;
+	}
+	public void enqueueDisplay() {
+		System.out.println(" Enqueue : Pid="+pid+" pname="+pname+" Owner="+owner);
+	}
+	
+	public void dequeueDisplay() {
+		System.out.println(" dequeue : Pid="+pid+" pname="+pname+" Owner="+owner);
+	}
+      
+}
+
+
+package com.q3;
+
+public class TesterMyProcess {
+	public static void main(String[] args) {
+     CircularQueue1<MyProcess> e= new CircularQueue1<MyProcess>(4);
+   //e.enqueue(new MyProcess());
+  
+     e.enqueue(new MyProcess(13,"Sagar","Suraj")).enqueueDisplay();
+   e.enqueue(new MyProcess(14,"Pritam","Jayesh")).enqueueDisplay();
+   e.enqueue(new MyProcess(15,"Anand","Dhruv")).enqueueDisplay();
+    e.enqueue(new MyProcess(12,"Vipul","Kapil")).enqueueDisplay();
+
+   e.dequeue().dequeueDisplay();
+   e.dequeue().dequeueDisplay();
+   e.dequeue().dequeueDisplay();
+   e.dequeue().dequeueDisplay();
+  e.enqueue(new MyProcess(05,"Pratik","Pathak")).enqueueDisplay();;
+//   e.dequeue().display();
+   
+e.peek().enqueueDisplay();
+   
+
+
+	}
+}
+
+
+output 
+
+ Enqueue : Pid=13 pname=Sagar Owner=Suraj
+ Enqueue : Pid=14 pname=Pritam Owner=Jayesh
+ Enqueue : Pid=15 pname=Anand Owner=Dhruv
+ Enqueue : Pid=12 pname=Vipul Owner=Kapil
+
+ dequeue : Pid=13 pname=Sagar Owner=Suraj
+ dequeue : Pid=14 pname=Pritam Owner=Jayesh
+ dequeue : Pid=15 pname=Anand Owner=Dhruv
+ dequeue : Pid=12 pname=Vipul Owner=Kapil
+
+ Enqueue : Pid=5 pname=Pratik Owner=Pathak
+
+Peek :MyProcess [pid=5, pname=Pratik, owner=Pathak]
+ Enqueue : Pid=5 pname=Pratik Owner=Pathak
