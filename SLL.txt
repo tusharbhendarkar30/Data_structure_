@@ -1,0 +1,219 @@
+package sll;
+
+public class Node {
+
+	private int data;
+	private Node next;
+
+	public Node() {
+		data = data;
+		next = null;
+	}
+
+	public Node(int data) {
+		this.data = data;
+		this.next = null;
+	}
+
+	public int getData() {
+		return data;
+	}
+
+	public void setData(int data) {
+		this.data = data;
+	}
+
+	public Node getNext() {
+		return next;
+	}
+
+	public void setNext(Node next) {
+		this.next = next;
+	}
+}
+
+
+
+package sll;
+
+import java.util.Iterator;
+
+public class Sll {
+	private Node head;
+
+	public Sll() {
+
+		this.head = head;
+	}
+
+	public boolean insertAtBeginning(int data) {
+		Node newNode = new Node(data);
+		if (head == null)
+			head = newNode;
+		else {
+			newNode.setNext(head);
+			head = newNode;
+		}
+		return true;
+
+	}
+
+	public boolean insertLast(int data) {
+		Node newNode = new Node(data);
+		Node prevNode = head;
+		if (head == null) {
+			head = newNode;
+
+		} else {
+			while (prevNode.getNext() != null) {
+				prevNode = prevNode.getNext();
+			}
+			prevNode.setNext(newNode);
+		}
+		return true;
+	}
+
+	public boolean deleteLast() {
+		Node lastNode = new Node();
+		if (head == null)
+			return false;
+		if (head.getNext() == null) {
+			head = null;
+			return true;
+		} else {
+			lastNode = head;
+			// Node prevNode =head;
+			while (lastNode.getNext().getNext() != null) {
+				lastNode = lastNode.getNext();
+			}
+			lastNode.setNext(null);
+			return true;
+
+		}
+
+	}
+
+	public boolean deleteFromFirst() {
+		Node lastNode = new Node();
+		if (head == null) {
+			return false;
+		} else {
+			head = head.getNext();
+
+		}
+		return true;
+	}
+
+	public boolean deleteNode(int position) {
+		int i = 0;
+		Node prevNode = head;
+		// Node newNode=new Node(i)
+		if (head == null) {
+			return false;
+		} else {
+			while (prevNode.getNext() != null && i < position - 1) {
+				prevNode = prevNode.getNext();
+				i++;
+
+			}
+			prevNode.setNext(prevNode.getNext().getNext());
+
+		}
+		return true;
+	}
+
+	public boolean insertAtPosition(int data, int position) {
+		Node newNode = new Node(data);
+		Node prevNode = head;
+		if(position <= 0)
+			return false;
+		if (position == 1 || head == null) {
+			head = newNode;
+			return true;
+		}
+//		if (position == 1 || head != null) {
+//			newNode=prevNode.getNext();
+//			newN
+//			return true;
+		 else {
+			for (int i = 1; i < position - 1; i++) {
+				prevNode=prevNode.getNext();
+			}
+			if(prevNode.getNext()!=null)
+			{
+				newNode.setNext(prevNode.getNext());
+				prevNode.setNext(newNode);
+			}
+		}
+		return true;
+	}
+
+	public void printList() {
+		Node tnode = head;
+		while (tnode != null) {
+			System.out.print(tnode.getData() + " ");
+			tnode = tnode.getNext();
+		}
+	}
+}
+
+
+
+package sll;
+
+public class Tester {
+
+	public static void main(String[] args) {
+		Sll l1 = new Sll();
+		
+		l1.insertAtBeginning(50);
+	      l1.printList();
+	      System.out.println(" ");
+		l1.insertAtBeginning(60);
+		 l1.printList();
+		 System.out.println(" ");
+		l1.insertAtBeginning(70);
+		l1.printList();
+		System.out.println();
+		l1.insertAtBeginning(80);
+		 l1.printList();
+		 System.out.println();
+		l1.insertAtBeginning(90);
+		 l1.printList();
+		 System.out.println();
+		l1.insertAtBeginning(10);
+		 l1.printList();
+		 System.out.println();
+		 l1.deleteNode(2);
+		 l1.printList();
+		 System.out.println();
+		 l1.deleteLast();
+		 l1.printList();
+		 System.out.println();
+		 l1.deleteFromFirst();
+		 l1.printList();
+		 System.out.println();
+		 l1.insertLast(10);
+		 l1.printList();
+		 System.out.println();
+		l1.insertAtPosition(99, 4);
+		l1.printList();
+	}
+
+}
+
+
+
+o/p
+
+50  
+60 50  
+70 60 50 
+80 70 60 50 
+90 80 70 60 50 
+10 90 80 70 60 50 
+10 90 70 60 50 
+10 90 70 60 
+90 70 60 
+90 70 60 10 
+90 70 60 99 10 
